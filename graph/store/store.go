@@ -17,6 +17,8 @@ type Storer interface {
 	GetAllJobs() ([]*model.Job, error)
 
 	GetJobByID(id int) (*model.Job, error)
+
+	GetAllJobsInCompany(id int) ([]*model.Job, error)
 }
 
 type Store struct {

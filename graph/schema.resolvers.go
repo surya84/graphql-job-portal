@@ -29,7 +29,6 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input model.NewUser) 
 
 // CreateCompany is the resolver for the createCompany field.
 func (r *mutationResolver) CreateCompany(ctx context.Context, input model.NewCompany) (*model.Company, error) {
-	//panic(fmt.Errorf("not implemented: CreateCompany - createCompany"))
 
 	return r.S.AddCompany(&input)
 }
@@ -43,42 +42,38 @@ func (r *mutationResolver) Login(ctx context.Context, email string, password str
 
 // CreateJob is the resolver for the createJob field.
 func (r *mutationResolver) CreateJob(ctx context.Context, input model.NewJob) (*model.Job, error) {
-	//panic(fmt.Errorf("not implemented: CreateJob - createJob"))
 
 	return r.S.CreateJob(&input)
 }
 
-// FindUserByEmail is the resolver for the findUserByEmail field.
-func (r *queryResolver) FindUserByEmail(ctx context.Context, email string) (*model.Users, error) {
-	panic(fmt.Errorf("not implemented: FindUserByEmail - findUserByEmail"))
-}
-
 // DisplayCompany is the resolver for the displayCompany field.
 func (r *queryResolver) DisplayCompany(ctx context.Context) ([]*model.Company, error) {
-	//panic(fmt.Errorf("not implemented: DisplayCompany - displayCompany"))
 
 	return r.S.DisplayCompany()
 }
 
 // CompanyByID is the resolver for the companyById field.
 func (r *queryResolver) CompanyByID(ctx context.Context, id int) (*model.Company, error) {
-	//panic(fmt.Errorf("not implemented: CompanyByID - companyById"))
 
 	return r.S.CompanyByID(id)
 }
 
 // GetAllJobs is the resolver for the getAllJobs field.
 func (r *queryResolver) GetAllJobs(ctx context.Context) ([]*model.Job, error) {
-	//panic(fmt.Errorf("not implemented: GetAllJobs - getAllJobs"))
 
 	return r.S.GetAllJobs()
 }
 
 // GetJobByID is the resolver for the getJobById field.
 func (r *queryResolver) GetJobByID(ctx context.Context, id int) (*model.Job, error) {
-	//panic(fmt.Errorf("not implemented: GetJobByID - getJobById"))
 
 	return r.S.GetJobByID(id)
+}
+
+// GetAllJobsInCompany is the resolver for the getAllJobsInCompany field.
+func (r *queryResolver) GetAllJobsInCompany(ctx context.Context, id int) ([]*model.Job, error) {
+
+	return r.S.GetAllJobsInCompany(id)
 }
 
 // Mutation returns MutationResolver implementation.
@@ -96,6 +91,9 @@ type queryResolver struct{ *Resolver }
 //   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
 //     it when you're done.
 //   - You have helper methods in this file. Move them out to keep these resolver files clean.
+func (r *queryResolver) FindUserByEmail(ctx context.Context, email string) (*model.Users, error) {
+	panic(fmt.Errorf("not implemented: FindUserByEmail - findUserByEmail"))
+}
 func (r *queryResolver) Company(ctx context.Context) (*model.Company, error) {
 	panic(fmt.Errorf("not implemented: FindUserByEmail - findUserByEmail"))
 }

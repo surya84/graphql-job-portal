@@ -10,8 +10,8 @@ type NewUser struct {
 
 type Users struct {
 	gorm.Model
-	ID       int    `json:"id" gorm:"primarykey;autoIncrement"`
+	//ID       int    `json:"id" gorm:"primarykey;autoIncrement"`
 	Name     string `json:"name"`
-	Email    string `json:"email"`
+	Email    string `json:"email" gorm:"unique"`
 	Password string `json:"Password"`
 }

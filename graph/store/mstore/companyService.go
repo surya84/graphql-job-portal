@@ -16,9 +16,13 @@ func (s *Conn) AddCompany(input *model.NewCompany) (*model.Company, error) {
 	tx := s.db.Create(&com)
 	if tx.Error != nil {
 		log.Fatalln(tx.Error)
-		return &model.Company{}, tx.Error
+		return nil, tx.Error
 	}
-	return &model.Company{}, nil
+	return &model.Company{
+		Name:      input.Name,
+		Location:  input.Location,
+		CompanyID: input.CompanyID,
+	}, nil
 }
 
 func (s *Conn) DisplayCompany() ([]*model.Company, error) {
@@ -27,7 +31,7 @@ func (s *Conn) DisplayCompany() ([]*model.Company, error) {
 	err := s.db.Find(&com).Error
 
 	if err != nil {
-		return []*model.Company{}, nil
+		return nil, nil
 	}
 
 	return com, nil
@@ -43,7 +47,7 @@ func (s *Conn) CompanyByID(id int) (*model.Company, error) {
 	err := tx.Find(&c).Error
 
 	if err != nil {
-		return &model.Company{}, err
+		return nil, err
 	}
 
 	return &c, nil

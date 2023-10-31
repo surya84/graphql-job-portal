@@ -26,7 +26,10 @@ func (s *Conn) AddUser(input *model.NewUser) (*model.Users, error) {
 		log.Fatalln(tx.Error)
 		return &model.Users{}, tx.Error
 	}
-	return &model.Users{}, nil
+	return &model.Users{
+		Name:  input.Name,
+		Email: input.Email,
+	}, nil
 }
 
 // func (s *Conn) FetchUser(email string) ()

@@ -15,10 +15,14 @@ func (s *Conn) CreateJob(input *model.NewJob) (*model.Job, error) {
 
 	tx := s.db.Create(&job)
 	if tx.Error != nil {
-		return &model.Job{}, tx.Error
+		return nil, tx.Error
 	}
 
-	return &model.Job{}, nil
+	return &model.Job{
+		Title:       input.Name,
+		Description: input.Description,
+		CompanyID:   input.CompanyID,
+	}, nil
 }
 
 func (s *Conn) GetAllJobs() ([]*model.Job, error) {
@@ -28,7 +32,7 @@ func (s *Conn) GetAllJobs() ([]*model.Job, error) {
 	tx := s.db.Find(&job)
 
 	if tx.Error != nil {
-		return []*model.Job{}, tx.Error
+		return nil, tx.Error
 	}
 
 	return job, nil
@@ -43,8 +47,22 @@ func (s *Conn) GetJobByID(id int) (*model.Job, error) {
 	err := tx.Find(&job).Error
 
 	if err != nil {
-		return &model.Job{}, err
+		return nil, err
 	}
 
+	return job, nil
+}
+
+func (s *Conn) GetAllJobsInCompany(id int) ([]*model.Job, error) {
+
+	var job []*model.Job
+
+	tx := s.db.Where("ID=?", id)
+
+	err := tx.Find(&job).Error
+
+	if err != nil {
+		return nil, nil
+	}
 	return job, nil
 }

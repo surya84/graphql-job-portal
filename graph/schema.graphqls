@@ -11,11 +11,11 @@ type Users{
 }
 
 type Query {
-  findUserByEmail(Email: String!):Users!
   displayCompany:[Company!]!
   companyById(ID:Int!):Company!
   getAllJobs:[Job!]!
   getJobById(ID:Int!):Job!
+  getAllJobsInCompany(ID:Int!):[Job!]!
 }
 
 type Company{
